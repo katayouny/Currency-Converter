@@ -5,6 +5,7 @@ body {
     /*Why non of them works?
     */
   margin: 0 10px;
+  align-items: center;
 }
 
 form {
@@ -72,6 +73,6 @@ input::-webkit-inner-spin-button {
   font-weight: bolder;
 }
 
-.convert-currency_buttonc-section {
+.convert-currency_button-section {
   align-items: last baseline;
 }

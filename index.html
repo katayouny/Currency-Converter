@@ -27,9 +27,6 @@
           </select>
           <br />
 
-          <!--<label for="input-date">Insert the current date</label>
-          <input type="date" id="input-date" name="date" required />-->
-
           <div></div>
 
           <p class="explanations-in-forms">Choose the the quote currency and insert the rate <br class="zero-rate">
@@ -87,8 +84,19 @@
       <p></p>
     </div>
 
-    <!--valuta-converter part --------->
+   <!--Finding the most moving valuta part ------------->
+   <div class="valuta-converter-most-moving-valuta">
+      <form class="valuta-converter-most-moving-valuta_form" id="most-moving-valuta-form">
+        <fieldset>
+          <legend>Showing the most moving valuta</legend>
+          <div><button class="finding-the-most-moving-value_button" type="button"><p>Click to see the most moving valuta</p></button>
+        </div>
+      </fieldset>
+          </form>
+          <br>
 
+
+    <!--valuta-converter part --------->
     <div class="valuta-converter-based-on-rates">
       <form class="valuta-converter-based-on-rates_form" id="valuta-converter-form">
         <fieldset>
@@ -150,13 +158,9 @@
 
             <!-- Display the converted amount -->
             <label for="converted-amount">Converted amount</label>
-            <input
-              id="converted-amount"
-              type="number"
-              class="amount-field"
-              pattern=""
-              placeholder="Converted Amount"
-            />
+            <div><p
+              id="converted-amount"></p>
+            </div>
         </fieldset>
       </form>
     </div>
