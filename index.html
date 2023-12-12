@@ -17,7 +17,6 @@
       <form class="currency-rate-creator_form" id="brand-currency-form">
         <fieldset>
           <legend>Brand currency rate conversion submission</legend>
-          <br />
 
           <label for="base-currency">The base currency</label>
           <select name="base" id="base-currency">
@@ -89,7 +88,7 @@
       <form class="valuta-converter-most-moving-valuta_form" id="most-moving-valuta-form">
         <fieldset>
           <legend>Showing the most moving valuta</legend>
-          <div><button class="finding-the-most-moving-valuta_button" type="submit">Click to see the most moving valuta</button>
+          <div><button id="finding-the-most-moving-valuta" class="finding-the-most-moving-valuta_button">Click to see the most moving valuta</button>
         </div>
         <p id="showing-moving-valuta"></p>
       </fieldset>
@@ -155,13 +154,11 @@
             Convert Valuta
           </button>
           <br>
-          <br>
 
             <!-- Display the converted amount -->
             <label for="converted-amount">Converted amount</label>
-            <div><p
-              id="converted-amount"></p>
-            </div>
+            <p id="converted-amount"></p>
+            
         </fieldset>
       </form>
     </div>

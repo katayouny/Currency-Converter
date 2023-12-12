@@ -31,8 +31,9 @@ console.log(brandObjectHistory);
 
 // Finding the most moving value -------------
 document
-  .getElementById("finding-the-most-moving-valuta_button")
+  .getElementById("finding-the-most-moving-valuta")
   .addEventListener("click", showTheMostMovingValuta);
+let mostMovingValutaCount;
 
 function showTheMostMovingValuta(event) {
   event.preventDefault();
@@ -41,7 +42,6 @@ function showTheMostMovingValuta(event) {
   let usdRateMoving = 0;
   let gpyRateMoving = 0;
   let ValutaCountsArray = [];
-  let MaxValutaNumber;
 
   for (let j = 0; j < brandObjectHistory.length; j++) {
     if (brandObjectHistory[j].base === "eur") {
@@ -60,26 +60,26 @@ function showTheMostMovingValuta(event) {
     eurRateMoving !== gpyRateMoving &&
     usdRateMoving !== gpyRateMoving
   ) {
-    MaxValutaNumber = Math.max(...ValutaCountsArray);
+    mostMovingValutaCount = Math.max(...ValutaCountsArray);
 
-    if (MaxValutaNumber === ValutaCountsArray[0]) {
+    if (mostMovingValutaCount === ValutaCountsArray[0]) {
       document.getElementById(
         "showing-moving-valuta"
-      ).innerText = `EUR with a count of ${eurRateMoving} has been the most moving valuta`;
+      ).innerHTML = `EUR with a count of ${eurRateMoving} has been the most moving valuta`;
       console.log(
         `EUR with a count of ${eurRateMoving} has been the most moving valuta`
       );
-    } else if (MaxValutaNumber === ValutaCountsArray[1]) {
+    } else if (mostMovingValutaCount === ValutaCountsArray[1]) {
       document.getElementById(
         "showing-moving-valuta"
-      ).innerText = `USD with a count of ${usdRateMoving} has been the most moving valuta`;
+      ).innerHTML = `USD with a count of ${usdRateMoving} has been the most moving valuta`;
       console.log(
         `USD with a count of ${usdRateMoving} has been the most moving valuta`
       );
-    } else if (MaxValutaNumber === ValutaCountsArray[2]) {
+    } else if (mostMovingValutaCount === ValutaCountsArray[2]) {
       document.getElementById(
         "showing-moving-valuta"
-      ).innerText = `GPY with a count of ${gpyRateMoving} has been the most moving valuta`;
+      ).innerHTML = `GPY with a count of ${gpyRateMoving} has been the most moving valuta`;
       console.log(
         `GPY with a count of ${gpyRateMoving} has been the most moving valuta`
       );
@@ -87,7 +87,7 @@ function showTheMostMovingValuta(event) {
   } else {
     console.log("Two or more values has the same moving count");
   }
-  return MaxValutaNumber;
+  return mostMovingValutaCount;
 }
 
 // Currency Converter form --------------
@@ -156,7 +156,7 @@ function valutaConverter(event) {
       "The money amount field is empty. Please insert a value for conversion"
     );
   }
-  document.getElementById("converted-amount").innerText = convertedAmount; //why it is not shown?
+  document.getElementById("converted-amount").innerHTML = convertedAmount; //why it is not shown?
   return convertedAmount;
 }
 
