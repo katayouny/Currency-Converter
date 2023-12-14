@@ -45,11 +45,11 @@ function valutaConverter(event) {
   if (brandObject.rates[chosenQuoteValuta]) {
     //Checks if the quote valuta is available
     convertedAmount = moneyAmount * brandObject.rates[chosenQuoteValuta];
+    document.getElementById("converted-amount-value").innerHTML =
+      convertedAmount.toFixed(2);
   } else {
     alert("Conversion rate not available, insert another valuta");
   }
-  document.getElementById("converted-amount-value").innerHTML =
-    convertedAmount.toFixed(2);
 }
 
 // updateing existing currency conversion rates with new rates form----------------
