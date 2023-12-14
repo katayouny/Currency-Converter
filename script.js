@@ -21,7 +21,7 @@ function brandCurrency(event) {
 
   document.getElementById("quote-name").value = "";
   document.getElementById("quote-rate").value = "";
-  console.log({ brandObject });
+  // console.log({ brandObject });
   console.log("List of inserted currency from Brand Currency Form:");
   console.log(brandObject.rates);
 }
