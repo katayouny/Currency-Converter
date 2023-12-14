@@ -9,9 +9,9 @@ body {
 }
 
 form {
-  width: 50%;
+  width: 35%;
   margin-left: 5%;
-  width: fit-content;
+  /*width: fit-content;*/
 }
 
 legend {

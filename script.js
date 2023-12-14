@@ -43,7 +43,7 @@ function valutaConverter(event) {
     .value.toLowerCase();
 
   if (brandObject.rates[chosenQuoteValuta]) {
-    //Checks if the guote valuta is available
+    //Checks if the quote valuta is available
     convertedAmount = moneyAmount * brandObject.rates[chosenQuoteValuta];
   } else {
     alert("Conversion rate not available, insert another valuta");
