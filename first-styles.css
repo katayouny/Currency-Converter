@@ -2,8 +2,8 @@ body {
   background-image: url(images/img.png);
   background-size: cover;
   /*-webkit-backdrop-filter: opacity(50);
-      /*Why non of them works?
-      */
+    /*Why non of them works?
+    */
   margin: 0 10px;
   align-items: center;
 }

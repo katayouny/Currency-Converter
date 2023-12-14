@@ -16,55 +16,44 @@
     <div class="currency-rate-creator">
       <form class="currency-rate-creator_form" id="brand-currency-form">
         <fieldset>
-          <legend>Brand currency rate conversion submission</legend>
+          <legend>Brand new currency rate ceator</legend>
 
           <label for="base-currency">The base currency</label>
-          <select name="base" id="base-currency">
-            <option value="eur">EUR</option>
-            <option value="usd">USD</option>
-            <option value="gpy">GPY</option>
-          </select>
+          <input
+            type="text"
+            id="base-currency"
+            value="EUR"
+            placeholder="EUR"
+            readonly
+          />
           <br />
 
           <div></div>
 
-          <p class="explanations-in-forms">Choose the the quote currency and insert the rate <br class="zero-rate">
-            Insert zero if the base cutrrency and quote currency are the same
-        </br>
-    </p>
+          <p class="explanations-in-forms">
+            Insert a the quote valuta and rate to be added<br
+              class="zero-rate"
+            />
+          </p>
 
           <span>
-            <label for="eur">EUR rate</label>
-          
+            <label for="quote-name">Quote name</label>
             <input
-              type="number"
-              id="eur"
-              name="EUR"
-              step="0.00000001"
+              type="text"
+              id="quote-name"
+              step="0.001"
               required
-              placeholder="0"
+              placeholder="quote-name"
             />
             <div></div>
 
-            <label for="usd">USD rate</label>
+            <label for="quote-rate">Quote rate</label>
             <input
               type="number"
-              id="usd"
-              name="USD"
-              step="0.00000001"
+              id="quote-rate"
+              step="0.001"
               required
-              placeholder="0"
-            />
-            <div></div>
-
-            <label for="gpy">GPY rate</label>
-            <input
-              type="number"
-              id="gpy"
-              name="GPY"
-              step="0.00000001"
-              required
-              placeholder="0"
+              placeholder="quote-rate"
             />
             <div></div>
           </span>
@@ -72,33 +61,20 @@
 
           <div class="convert-currency_buttonc-section">
             <button class="convert-currency_button" type="submit">
-              Submit
+              Add currency & rate
             </button>
           </div>
         </fieldset>
       </form>
     </div>
-
-    <div>
-      <p></p>
-    </div>
-
-   <!--Finding the most moving valuta part ------------->
-   <div class="valuta-converter-most-moving-valuta">
-      <form class="valuta-converter-most-moving-valuta_form" id="most-moving-valuta-form">
-        <fieldset>
-          <legend>Showing the most moving valuta</legend>
-          <div><button id="finding-the-most-moving-valuta" class="finding-the-most-moving-valuta_button">Click to see the most moving valuta</button>
-        </div>
-        <p id="showing-moving-valuta"></p>
-      </fieldset>
-          </form>
-          <br>
-
+<BR></BR>
 
     <!--valuta-converter part --------->
     <div class="valuta-converter-based-on-rates">
-      <form class="valuta-converter-based-on-rates_form" id="valuta-converter-form">
+      <form
+        class="valuta-converter-based-on-rates_form"
+        id="valuta-converter-form"
+      >
         <fieldset>
           <legend>Money Conversion based on predefined exchange rate</legend>
           <p>
@@ -111,59 +87,58 @@
               min="0"
               step="0.001"
               required
-              placeholder="Enter the amount 0.000"
+              placeholder="Enter the amount 0.00"
             />
           </p>
 
           <p></p>
 
-          <div><p class="explanations-in-forms">Choose valutas for conversion</p></div> 
+          <div>
+            <p class="explanations-in-forms">
+              Insert the quote valuta for conversion
+            </p>
+          </div>
 
-          <!--optins for base valuta selection-->
-          <label for="valutas-exchange-selction-base-valuta"
-            >Choose the base valuta</label>
-          <select
-            name="valuta1"
-            id="valutas-exchange-selction-base-valuta"
-            required
+          <!--Base valuta-->
+          <label for="valuta-exchange-selction-base-valuta"
+            >The base valuta</label
           >
-            <option value="">Select one</option>
-            <option value="eur">EUR</option>
-            <option value="usd">USD</option>
-            <option value="gpy">GPY</option>
-          </select>
+          <input
+            type="text"
+            id="base-currency"
+            value="EUR"
+            placeholder="EUR"
+            readonly
+          />
 
           <div></div>
 
-          <!--optins for quote valuta selection-->
-          <label for="valutas-exchange-selction-quote-valuta"
-            >Choose the quote valuta</label>
-          <select
-            name="valuta2"
-            id="valutas-exchange-selction-quote-valuta"
+          <!--Entering quote valuta -->
+          <label for="valuta-exchange-quote-valuta">Quote valuta</label>
+          <input
+            type="text"
+            id="valuta-exchange-quote-valuta"
+            step="0.001"
             required
-          >
-            <option value="">Select one</option>
-            <option value="eur">EUR</option>
-            <option value="usd">USD</option>
-            <option value="gpy">GPY</option>
-          </select>
+            placeholder="Quote-valuta"
+          />
+          <div></div>
+          <br />
 
           <!-- valuta convert button -->
           <button class="valuta-converter_button" type="submit">
-            Convert Valuta
+            Convert the valuta
           </button>
+          <br />
           <br>
-
-            <!-- Display the converted amount -->
-            <label for="converted-amount">Converted amount</label>
-            <p id="converted-amount"></p>
-            
+          <!-- Display the converted amount -->
+          <span><label for="converted-amount">Converted amount: 
+          <p id="converted-amount-value"></p></label></span> 
+          
         </fieldset>
       </form>
     </div>
-    <div>
-    </div>
+    <div></div>
     <script src="script.js"></script>
   </body>
 </html>
