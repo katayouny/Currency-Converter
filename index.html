@@ -11,6 +11,10 @@
       <h2>Currency Converter</h2>
     </div>
 
+    <!-- *************************************************************************************-->
+    <!-- Week1 / An object of a base currency, quote currencies object, and rates -------------->
+    <!-- *************************************************************************************-->
+
     <!-- currency-rate-creator part --------------->
 
     <div class="currency-rate-creator">
@@ -70,6 +74,7 @@
     <br />
 
     <!--valuta-converter part --------->
+    <!-- *********************************************************-->
     <div class="valuta-converter-based-on-rates">
       <form
         class="valuta-converter-based-on-rates_form"
@@ -77,20 +82,19 @@
       >
         <fieldset>
           <legend>Money Conversion based on predefined exchange rate</legend>
-          <p>
-            <label>Money amount</label>
-            <input
-              id="money-amount"
-              type="number"
-              class="amount-field"
-              pattern=""
-              min="0"
-              step="0.001"
-              required
-              placeholder="Enter the amount 0.00"
-            />
-          </p>
-          <br />
+
+          <label>Money amount</label>
+          <input
+            id="money-amount"
+            type="number"
+            class="amount-field"
+            pattern=""
+            min="0"
+            step="0.001"
+            required
+            placeholder="Enter the amount 0.00"
+          />
+
           <div>
             <p class="explanations-in-forms">
               Insert the quote valuta for conversion
@@ -137,7 +141,56 @@
         </fieldset>
       </form>
     </div>
-    <div></div>
+
+    <!-- *********************************************************-->
+    <!-- Week2 / An aaray of the currency rate objects -------------->
+    <!-- *********************************************************-->
+    <br />
+    <div id="array-of-currencies-section-beta">
+      <form id="brand-currency-form-beta">
+        <fieldset>
+          <legend>Currency rate creator beta</legend>
+
+          <!-- base currency selection -->
+          <label for="base-currency-beta">Choose a base currency:</label>
+          <select id="base-currency-beta">
+            <option value="EUR">"EUR"</option>
+            <option value="USD">"USD"</option>
+            <option value="DKK">"DKK"</option>
+          </select>
+          <br />
+
+          <!-- quote currency selection -->
+          <label for="quote-name-beta">Choose a quote currency:</label>
+          <select id="quote-name-beta">
+            <option value="EUR">"EUR"</option>
+            <option value="USD">"USD"</option>
+            <option value="DKK">"DKK"</option>
+          </select>
+          <br />
+
+          <!--Entering quote rate -->
+          <label for="quote-rate-beta">Conversion rate</label>
+          <input
+            type="number"
+            id="quote-rate-beta"
+            step="0.001"
+            required
+            placeholder="quote-rate"
+          />
+
+          <!--Conver currency button -->
+          <button class="convert-currency_button" type="submit">
+            Add currencies and rates
+          </button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="currency-rates-grid-container" class="table-container">
+      <!-- the currency table will get displayed here by js codes -->
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
