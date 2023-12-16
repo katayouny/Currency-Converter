@@ -159,3 +159,5 @@ function CurrencyDisplayTable() {
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
+
+//
