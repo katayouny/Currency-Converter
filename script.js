@@ -90,45 +90,19 @@ function brandCurrencyBeta(event) {
   const quoteName = document.getElementById("quote-name-beta").value;
   const quoteRate = document.getElementById("quote-rate-beta").value;
 
-  if (baseCurrency === "EUR") {
-    brandObjectArray[0].rates[quoteName] = +quoteRate;
-  } else if (baseCurrency === "USD") {
-    brandObjectArray[1].rates[quoteName] = +quoteRate;
-  } else if (baseCurrency === "DKK") {
-    brandObjectArray[2].rates[quoteName] = +quoteRate;
-  }
+  const selectedCurrencyBase = brandObjectArray.find(
+    (currency) => currency.base === baseCurrency
+  );
+
+  selectedCurrencyBase.rates[quoteName] = +quoteRate;
   document.getElementById("quote-rate-beta").value = "";
   console.log(brandObjectArray);
 
-  //Calling function: Display all base currencies and their rates
-  displayBaseAndQuoteCurrenciesAndRates();
   //Calling function: Display currencies in table
-  CurrencyDisplayTable();
+  currencyDisplayTable();
 }
 
-//Function: checking base currency and showing existing quotes and rate for each base ---------
-function displayBaseAndQuoteCurrenciesAndRates() {
-  console.log("Displaying the Base and Quote currencies and conversion rates:");
-  for (currency of brandObjectArray) {
-    if (currency.base === "EUR") {
-      console.log("EUR base:");
-      console.log(currency.rates);
-    } else if (currency.base === "USD") {
-      console.log("USD base:");
-      console.log(currency.rates);
-    } else {
-      console.log("DKK base:");
-      console.log(currency.rates);
-      //console.log(`${currency.rates}`);  Why this ${currency.rates} doesn't work?! It gives [Object Object]
-    }
-  }
-}
-//How can I use filter instead of these two lines ??
-//Is his one correct?
-//brandObjectArray.forEach( (currency) => {
-//if......});
-
-function CurrencyDisplayTable() {
+function currencyDisplayTable() {
   const gridContainer = document.getElementById(
     "currency-rates-grid-container"
   );
