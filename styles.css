@@ -76,3 +76,17 @@ input::-webkit-inner-spin-button {
 .convert-currency_button-section {
   align-items: last baseline;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #a90600;
+  padding: 8px;
+  text-align: left;
+}
+
+/**/
