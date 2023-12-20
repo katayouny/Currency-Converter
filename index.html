@@ -11,6 +11,10 @@
       <h2>Currency Converter</h2>
     </div>
 
+    <!-- *************************************************************************************-->
+    <!-- Week1 / An object of a base currency, quote currencies object, and rates -------------->
+    <!-- *************************************************************************************-->
+
     <!-- currency-rate-creator part --------------->
 
     <div class="currency-rate-creator">
@@ -60,7 +64,7 @@
           <br />
 
           <div class="convert-currency_buttonc-section">
-            <button class="convert-currency_button" type="submit">
+            <button class="all-buttons" type="submit">
               Add currency & rate
             </button>
           </div>
@@ -70,6 +74,7 @@
     <br />
 
     <!--valuta-converter part --------->
+    <!-- *********************************************************-->
     <div class="valuta-converter-based-on-rates">
       <form
         class="valuta-converter-based-on-rates_form"
@@ -77,20 +82,19 @@
       >
         <fieldset>
           <legend>Money Conversion based on predefined exchange rate</legend>
-          <p>
-            <label>Money amount</label>
-            <input
-              id="money-amount"
-              type="number"
-              class="amount-field"
-              pattern=""
-              min="0"
-              step="0.001"
-              required
-              placeholder="Enter the amount 0.00"
-            />
-          </p>
-          <br />
+
+          <label for="money-amount">Money amount</label>
+          <input
+            id="money-amount"
+            type="number"
+            class="amount-field"
+            pattern=""
+            min="0"
+            step="0.001"
+            required
+            placeholder="Enter the amount 0.00"
+          />
+
           <div>
             <p class="explanations-in-forms">
               Insert the quote valuta for conversion
@@ -98,9 +102,7 @@
           </div>
 
           <!--Base valuta-->
-          <label for="valuta-exchange-selction-base-valuta"
-            >The base valuta</label
-          >
+          <label for="base-currency">The base valuta</label>
           <input
             type="text"
             id="base-currency"
@@ -123,21 +125,97 @@
           <br />
 
           <!-- valuta convert button -->
-          <button class="valuta-converter_button" type="submit">
-            Convert the valuta
-          </button>
+          <button class="all-buttons" type="submit">Convert the valuta</button>
           <br />
           <br />
           <!-- Display the converted amount -->
           <span
-            ><label for="converted-amount"
-              >Converted amount:
-              <p id="converted-amount-value"></p></label
-          ></span>
+            ><p>Converted amount:</p>
+            <!-- is it correct!! for and id are different -->
+            <p id="converted-amount-value"></p>
+          </span>
         </fieldset>
       </form>
     </div>
-    <div></div>
+
+    <!-- **********************************************************-->
+    <!-- Week2 / An aaray of the currency rate objects -------------->
+    <!-- **********************************************************-->
+    <br />
+    <div id="array-of-currencies-section-beta">
+      <form id="brand-currency-form-beta">
+        <fieldset>
+          <legend>Currency rate creator beta</legend>
+
+          <!-- base currency selection -->
+          <label for="base-currency-beta">Choose a base currency:</label>
+          <select id="base-currency-beta">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
+          <br />
+
+          <!-- quote currency selection -->
+          <label for="quote-name-beta">Choose a quote currency:</label>
+          <select id="quote-name-beta">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
+          <br />
+
+          <!--Entering quote rate -->
+          <label for="quote-rate-beta">Conversion rate</label>
+          <input
+            type="number"
+            id="quote-rate-beta"
+            step="0.001"
+            required
+            placeholder="quote-rate"
+          />
+
+          <!--Conver currency button -->
+          <button class="all-buttons" type="submit">
+            Add currencies and rates
+          </button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="currency-rates-grid-container" class="table-container">
+      <!-- the currency table will get displayed here by js codes -->
+    </div>
+    <br />
+
+    <!--- Second part of task WEEK 2  -------------------------------------------------- -->
+    <!-- Showing the message of id the entered curreny rate is exist. -->
+    <form id="check-if-rate-exist">
+      <fieldset>
+        <legend>Check for rate existancy within a ragne</legend>
+        <label for="rate-from">From</label>
+        <input
+          type="number"
+          id="rate-from"
+          placeholder="Enter the rate 0.001"
+          required
+        />
+        <label for="rate-to">To</label>
+        <input
+          type="number"
+          id="rate-to"
+          placeholder="Enter the rate 0.001"
+          required
+        />
+
+        <button class="all-buttons" type="button">Find the rates</button>
+        <button class="all-buttons" type="reset">Reset</button>
+      </fieldset>
+    </form>
+    <div id="filtered-currency-rates-grid-container" class="table-container">
+      <!-- the 'filtered' currency table will get displayed here  -->
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
