@@ -22,8 +22,8 @@ function brandCurrency(event) {
   document.getElementById("quote-name").value = "";
   document.getElementById("quote-rate").value = "";
   // console.log({ brandObject });
-  console.log("List of inserted currency from Brand Currency Form:");
-  console.log(brandObject.rates);
+  // console.log("List of inserted currencies:");
+  //console.log(brandObject.rates);
 }
 
 // Currency Converter form --------------
@@ -95,13 +95,12 @@ function brandCurrencyBeta(event) {
 
   selectedCurrency.rates[quoteName] = +quoteRate;
   document.getElementById("quote-rate-beta").value = "";
-  console.log(brandObjectArray);
 
-  //Calling function: Display currencies in table
-  currencyDisplayTable();
+  //Calling function: Display all currencies in a table
+  //currencyDisplayTable();
 }
 
-function currencyDisplayTable() {
+/*function currencyDisplayTable() {
   const gridContainer = document.getElementById(
     "currency-rates-grid-container"
   );
@@ -131,16 +130,16 @@ function currencyDisplayTable() {
 
   // Append the table to the grid container
   gridContainer.appendChild(table);
-}
+}*/
 
 //--- Second part of task WEEK 2   -------------------------------------------------------------
 // Getting a range for rates, searching for rates in brandObjectArray and show filterede data.
-let fromRate;
-let toRate;
+let fromRate = null;
+let toRate = null;
 
 document
   .getElementById("check-if-rate-exist")
-  .addEventListener("click", checkForRateExistancy);
+  .addEventListener("submit", checkForRateExistancy);
 
 document
   .getElementById("check-if-rate-exist")
@@ -157,6 +156,8 @@ function resetValueBoxes(event) {
   event.preventDefault();
   document.getElementById("rate-from").value = "";
   document.getElementById("rate-to").value = "";
+  fromRate = null;
+  toRate = null;
 }
 
 function filteredCurrencyDisplayTable() {
