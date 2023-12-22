@@ -12,9 +12,8 @@
     </div>
 
     <!-- *************************************************************************************-->
-    <!-- Week1 / An object of a base currency, quote currencies object, and rates -------------->
+    <!-- An object of a base currency, quote currencies object, and rates -------------->
     <!-- *************************************************************************************-->
-
     <!-- currency-rate-creator part --------------->
 
     <div class="currency-rate-creator">
@@ -22,10 +21,10 @@
         <fieldset>
           <legend>Brand new currency rate ceator</legend>
 
-          <label for="base-currency">The base currency</label>
+          <label for="base-currency-alpha">The base currency</label>
           <input
             type="text"
-            id="base-currency"
+            id="base-currency-alpha"
             value="EUR"
             placeholder="EUR"
             readonly
@@ -106,8 +105,6 @@
             placeholder="EUR"
             readonly
           />
-          <div></div>
-
           <!--Entering quote valuta -->
           <label for="valuta-exchange-quote-valuta">Quote valuta</label>
           <input
@@ -117,16 +114,12 @@
             required
             placeholder="Quote-valuta"
           />
-          <div></div>
           <br />
-
           <!-- valuta convert button -->
           <button class="all-buttons" type="submit">Convert the valuta</button>
-          <br />
           <!-- Display the converted amount -->
           <span
             ><p>Converted amount:</p>
-            <!-- is it correct!! for and id are different -->
             <p id="converted-amount-value"></p>
           </span>
         </fieldset>
@@ -134,16 +127,19 @@
     </div>
 
     <!-- **********************************************************-->
-    <!-- Week2 / An aaray of the currency rate objects -------------->
+    <!-- An array of the currency rate objects -------------->
     <!-- **********************************************************-->
+
     <br />
     <div id="array-of-currencies-section-beta">
-      <form id="brand-currency-form-beta">
+      <form id="currencies-and-rate-creation-beta">
         <fieldset>
-          <legend>Currency rate creator beta</legend>
+          <legend>Currency rate creator</legend>
 
           <!-- base currency selection -->
-          <label for="base-currency-beta">Choose a base currency:</label>
+          <label for="base-currency-beta"
+            >Choose a base currency to be added:</label
+          >
           <select id="base-currency-beta">
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
@@ -152,7 +148,9 @@
           <br />
 
           <!-- quote currency selection -->
-          <label for="quote-name-beta">Choose a quote currency:</label>
+          <label for="quote-name-beta"
+            >Choose a quote currency to be added:</label
+          >
           <select id="quote-name-beta">
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
@@ -170,24 +168,19 @@
             placeholder="quote-rate"
           />
 
-          <!--Conver currency button -->
-          <button class="all-buttons" type="submit">
-            Add currencies and rates
-          </button>
+          <!--Add the entered currencies with related conversion rate  -->
+          <button class="all-buttons" type="submit">Add</button>
         </fieldset>
       </form>
     </div>
-
-    <div id="currency-rates-grid-container" class="table-container">
-      <!-- the currency table will get displayed here by js codes -->
-    </div>
     <br />
 
-    <!--- Second part of task WEEK 2  -------------------------------------------------- -->
-    <!-- Showing the message of id the entered curreny rate is exist. -->
-    <form id="check-if-rate-exist">
+    <!--- Second part - adding rate range condition  ------------------------- -->
+    <form id="show-currencies-with-rate-check">
       <fieldset>
-        <legend>Check for rate existancy within a ragne</legend>
+        <legend>
+          Set condition of rate range for currencies demonstartion
+        </legend>
         <label for="rate-from">From</label>
         <input
           type="number"
@@ -203,12 +196,14 @@
           required
         />
 
-        <button class="all-buttons" type="submit">Find the rates</button>
-        <button class="all-buttons" type="reset">Reset</button>
+        <button class="all-buttons" type="submit">
+          Show currencies and conversion rates
+        </button>
+        <button class="all-buttons" type="reset">Reset rate condition</button>
       </fieldset>
     </form>
-    <div id="filtered-currency-rates-grid-container" class="table-container">
-      <!-- the 'filtered' currency table will get displayed here  -->
+    <div id="currency-rates-grid-container" class="table-container">
+      <!-- the currency table with the option of 'filtered rates' will get displayed here  -->
     </div>
 
     <script src="script.js"></script>

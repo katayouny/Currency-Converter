@@ -1,4 +1,4 @@
-// Brand Currency form -------------
+// Brand Currency form alpha -------------
 const brandObject = {
   timestamp: Date.now(),
   base: "EUR",
@@ -13,7 +13,7 @@ document
 function brandCurrency(event) {
   event.preventDefault();
 
-  const baseCurrency = document.getElementById("base-currency").value;
+  const baseCurrency = document.getElementById("base-currency-alpha").value;
   brandObject.base = baseCurrency;
   let quoteName = document.getElementById("quote-name").value.toLowerCase();
   let quoteRate = document.getElementById("quote-rate").value;
@@ -21,12 +21,9 @@ function brandCurrency(event) {
 
   document.getElementById("quote-name").value = "";
   document.getElementById("quote-rate").value = "";
-  // console.log({ brandObject });
-  // console.log("List of inserted currencies:");
-  //console.log(brandObject.rates);
 }
 
-// Currency Converter form --------------
+// Currency Converter form -------------
 
 document
   .getElementById("valuta-converter-form")
@@ -54,7 +51,7 @@ function valutaConverter(event) {
 
 // updateing existing currency conversion rates with new rates form
 // **********************************************
-// Week2 / An array of the currency rate objects
+// An array of the currency rate objects
 // **********************************************
 
 const brandObjectArray = [
@@ -79,12 +76,20 @@ const brandObjectArray = [
 ];
 
 document
-  .getElementById("brand-currency-form-beta")
+  .getElementById("currencies-and-rate-creation-beta")
   .addEventListener("submit", brandCurrencyBeta);
+
+document
+  .getElementById("show-currencies-with-rate-check")
+  .addEventListener("submit", currencyDisplayTable);
+
+document
+  .getElementById("show-currencies-with-rate-check")
+  .addEventListener("reset", resetRateCondition);
+
 function brandCurrencyBeta(event) {
   event.preventDefault();
-
-  //getting and filling objects of array------------
+  //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
   const baseCurrency = document.getElementById("base-currency-beta").value;
   const quoteName = document.getElementById("quote-name-beta").value;
   const quoteRate = document.getElementById("quote-rate-beta").value;
@@ -95,12 +100,24 @@ function brandCurrencyBeta(event) {
 
   selectedCurrency.rates[quoteName] = +quoteRate;
   document.getElementById("quote-rate-beta").value = "";
-
-  //Calling function: Display all currencies in a table
-  //currencyDisplayTable();
 }
 
-/*function currencyDisplayTable() {
+let fromRate = null;
+let toRate = null;
+function resetRateCondition(event) {
+  event.preventDefault();
+  document.getElementById("rate-from").value = "";
+  document.getElementById("rate-to").value = "";
+  fromRate = null;
+  toRate = null;
+}
+
+function currencyDisplayTable(event) {
+  event.preventDefault();
+
+  fromRate = document.getElementById("rate-from").value;
+  toRate = document.getElementById("rate-to").value;
+
   const gridContainer = document.getElementById(
     "currency-rates-grid-container"
   );
@@ -117,67 +134,8 @@ function brandCurrencyBeta(event) {
   headerRow.insertCell(1).textContent = "Quote Currency";
   headerRow.insertCell(2).textContent = "Rate";
 
-  // Create rows for each currency object
-  brandObjectArray.forEach((currency) => {
-    for (const quoteCurrency in currency.rates) {
-      const row = table.insertRow();
-      //creating 3 cells as there are 3 currencies: EUR, USD, DKK
-      row.insertCell(0).textContent = currency.base;
-      row.insertCell(1).textContent = quoteCurrency;
-      row.insertCell(2).textContent = currency.rates[quoteCurrency];
-    }
-  });
-
-  // Append the table to the grid container
-  gridContainer.appendChild(table);
-}*/
-
-//--- Second part of task WEEK 2   -------------------------------------------------------------
-// Getting a range for rates, searching for rates in brandObjectArray and show filterede data.
-let fromRate = null;
-let toRate = null;
-
-document
-  .getElementById("check-if-rate-exist")
-  .addEventListener("submit", checkForRateExistancy);
-
-document
-  .getElementById("check-if-rate-exist")
-  .addEventListener("reset", resetValueBoxes);
-
-function checkForRateExistancy(event) {
-  event.preventDefault();
-  fromRate = document.getElementById("rate-from").value;
-  toRate = document.getElementById("rate-to").value;
-  filteredCurrencyDisplayTable();
-}
-
-function resetValueBoxes(event) {
-  event.preventDefault();
-  document.getElementById("rate-from").value = "";
-  document.getElementById("rate-to").value = "";
-  fromRate = null;
-  toRate = null;
-}
-
-function filteredCurrencyDisplayTable() {
-  const gridContainer = document.getElementById(
-    "filtered-currency-rates-grid-container"
-  );
-
-  // Clear the previous content in the grid container
-  gridContainer.innerHTML = "";
-
-  // Create a table element
-  const table = document.createElement("table");
-
-  // Create header row
-  const headerRow = table.createTHead().insertRow(0);
-  headerRow.insertCell(0).textContent = "Base Currency";
-  headerRow.insertCell(1).textContent = "Quote Currency";
-  headerRow.insertCell(2).textContent = "Rate";
-
-  // Creating rows for each filtered currency object
+  // Creating rows for each entered currency object of brandObjectArray
+  //if condition sets >>> creating rows based on rate condition
   brandObjectArray.forEach((currency) => {
     for (const quoteCurrency in currency.rates) {
       if (
