@@ -155,3 +155,34 @@ function currencyDisplayTable(event) {
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
+
+// Implementing a timeout to show the market open and close time
+let currentHour;
+let houresLeftToOpen;
+function marketMessageBackgroun(color) {
+  document.getElementById(
+    "markert-message-background-color"
+  ).style.backgroundColor = color; //background color of Market message
+}
+
+setInterval(() => {
+  currentHour = new Date().getHours();
+  if (currentHour >= 9 && currentHour < 17) {
+    document.getElementById("maket-time-open-close-message").innerHTML =
+      " Market is open now";
+    marketMessageBackgroun("rgb(0, 219, 0)");
+  } else if (currentHour >= 17 && currentHour <= 24) {
+    houresLeftToOpen = 24 - currentHour + 9;
+    document.getElementById(
+      "maket-time-open-close-message"
+    ).innerHTML = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
+    marketMessageBackgroun("rgb(219, 0, 0)");
+  } else if (currentHour > 0 && currentHour < 9) {
+    houresLeftToOpen = 9 - currentHour;
+    document.getElementById(
+      "maket-time-open-close-message"
+    ).innerHTML = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
+    marketMessageBackgroun("rgb(219, 0, 0)");
+  }
+}, 500);
+// second part
