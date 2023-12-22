@@ -2,7 +2,6 @@ body {
   background-image: url(images/img.png);
   background-size: cover;
   /*-webkit-backdrop-filter: opacity(50);
-      /*Why non of them works?
       */
   margin: 0 10px;
   align-items: center;
@@ -42,7 +41,7 @@ input[type="number"] {
   appearance: none;
 }
 
-input::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -87,4 +86,14 @@ td {
   border: 1px solid #a90600;
   padding: 8px;
   text-align: left;
+}
+
+/*.market-message.p {
+  font-weight: bolder;
+  font-size: large;
+}*/
+
+.market-message-holder {
+  padding: 1px 1px 1px 40px;
+  font-weight: bolder;
 }
