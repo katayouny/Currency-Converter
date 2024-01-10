@@ -78,7 +78,7 @@ input::-webkit-inner-spin-button {
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: auto;
 }
 
 th,
@@ -88,12 +88,15 @@ td {
   text-align: left;
 }
 
-/*.market-message.p {
+.market-message {
+  color: rgb(0, 0, 0);
   font-weight: bolder;
   font-size: large;
-}*/
+  margin: 2px 0 2px 40px;
+}
 
 .market-message-holder {
-  padding: 1px 1px 1px 40px;
-  font-weight: bolder;
+  display: block;
+  width: 35%;
+  margin-left: 5%;
 }
