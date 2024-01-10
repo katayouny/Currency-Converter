@@ -146,7 +146,6 @@ function brandCurrencyBeta(event) {
 
   selectedCurrency.rates[quoteName] = +quoteRate;
   document.getElementById("quote-rate-beta").value = "";
-  console.log(brandObjectArray);
 }
 
 let fromRate = null;
