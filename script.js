@@ -1,3 +1,32 @@
+// Implementing a timeout to show the market open and close time
+function marketMessageBackground(color) {
+  document.getElementById(
+    "markert-message-background-color"
+  ).style.backgroundColor = color; //background color of Market message
+}
+
+setInterval(() => {
+  const currentHour = new Date().getHours();
+  const openingHour = 9;
+  const closingHour = 17;
+
+  if (currentHour > openingHour && currentHour < closingHour) {
+    document.getElementById("maket-time-open-close-message").textContent =
+      " Market is open now";
+    marketMessageBackground("rgb(0, 219, 0)");
+  }
+  if (currentHour < openingHour || currentHour > closingHour) {
+    const houresLeftToOpen =
+      currentHour > closingHour
+        ? 24 - currentHour + 9
+        : openingHour - currentHour;
+    document.getElementById(
+      "maket-time-open-close-message"
+    ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
+    marketMessageBackground("rgb(219, 0, 0)");
+  }
+}, 1000);
+
 // Brand Currency form alpha -------------
 const brandObject = {
   timestamp: Date.now(),
@@ -56,24 +85,40 @@ function valutaConverter(event) {
 
 const brandObjectArray = [
   {
-    timestamp: Date.now(),
+    //timestamp: Date.now(),
     base: "EUR",
     date: new Date().toLocaleDateString(),
     rates: {},
   },
   {
-    timestamp: Date.now(),
+    //timestamp: Date.now(),
     base: "USD",
     date: new Date().toLocaleDateString(),
     rates: {},
   },
   {
-    timestamp: Date.now(),
+    //timestamp: Date.now(),
     base: "DKK",
     date: new Date().toLocaleDateString(),
     rates: {},
   },
 ];
+
+//The object of special/high rates
+const specialRates = {
+  EUR: {
+    USD: 2,
+    DKK: 3,
+  },
+  USD: {
+    EUR: 3,
+    DKK: 6,
+  },
+  DKK: {
+    EUR: 7,
+    USD: 6,
+  },
+};
 
 document
   .getElementById("currencies-and-rate-creation-beta")
@@ -87,6 +132,8 @@ document
   .getElementById("show-currencies-with-rate-check")
   .addEventListener("reset", resetRateCondition);
 
+//ading currencies and rate function
+//**********************************
 function brandCurrencyBeta(event) {
   event.preventDefault();
   //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
@@ -104,6 +151,8 @@ function brandCurrencyBeta(event) {
 
 let fromRate = null;
 let toRate = null;
+// reset rate conditions fiels functions
+//**************************************
 function resetRateCondition(event) {
   event.preventDefault();
   document.getElementById("rate-from").value = "";
@@ -112,6 +161,7 @@ function resetRateCondition(event) {
   toRate = null;
 }
 
+//Showing the table of currencies and rates with applied rate range filter
 function currencyDisplayTable(event) {
   event.preventDefault();
 
@@ -135,9 +185,14 @@ function currencyDisplayTable(event) {
   headerRow.insertCell(2).textContent = "Rate";
 
   // Creating rows for each entered currency object of brandObjectArray
-  //if condition sets >>> creating rows based on rate condition
+  //
+  //if condition sets >> creating rows based on rate condition
+  //plus Check if currency.rates[quoteCurrency] is a specialRate
+
   brandObjectArray.forEach((currency) => {
     for (const quoteCurrency in currency.rates) {
+      const baseCurrency = currency.base;
+      const currentRate = currency.rates[quoteCurrency];
       if (
         fromRate !== null &&
         toRate !== null &&
@@ -148,10 +203,22 @@ function currencyDisplayTable(event) {
         //creating cells
         row.insertCell(0).textContent = currency.base;
         row.insertCell(1).textContent = quoteCurrency;
-        row.insertCell(2).textContent = currency.rates[quoteCurrency];
+        if (
+          specialRates[baseCurrency] &&
+          specialRates[baseCurrency][quoteCurrency]
+        ) {
+          const specialRate = specialRates[baseCurrency][quoteCurrency];
+          row.insertCell(2).textContent = `${currency.rates[quoteCurrency]} ${
+            currentRate >= specialRate
+              ? "🔥Don't trade today.The conversion rate is too high"
+              : ""
+          }`;
+        }
       }
     }
   });
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
+
+//finding the hotest conversion rate
