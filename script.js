@@ -133,6 +133,7 @@ document
   .addEventListener("reset", resetRateCondition);
 
 //ading currencies and rate function
+//**********************************
 function brandCurrencyBeta(event) {
   event.preventDefault();
   //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
@@ -150,6 +151,8 @@ function brandCurrencyBeta(event) {
 
 let fromRate = null;
 let toRate = null;
+// reset rate conditions fiels functions
+//**************************************
 function resetRateCondition(event) {
   event.preventDefault();
   document.getElementById("rate-from").value = "";
@@ -184,7 +187,7 @@ function currencyDisplayTable(event) {
   // Creating rows for each entered currency object of brandObjectArray
   //
   //if condition sets >> creating rows based on rate condition
-  //plus Check if  currency.rates[quoteCurrency] is a specialRate
+  //plus Check if currency.rates[quoteCurrency] is a specialRate
 
   brandObjectArray.forEach((currency) => {
     for (const quoteCurrency in currency.rates) {
@@ -207,7 +210,7 @@ function currencyDisplayTable(event) {
           const specialRate = specialRates[baseCurrency][quoteCurrency];
           row.insertCell(2).textContent = `${currency.rates[quoteCurrency]} ${
             currentRate >= specialRate
-              ? "Oh  :fire:  Don't trade today.The conversion rate is too high"
+              ? "🔥Don't trade today.The conversion rate is too high"
               : ""
           }`;
         }
@@ -217,36 +220,5 @@ function currencyDisplayTable(event) {
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
-
-// checking for special rates and making alert
-function checkSpecialRates() {
-  brandObjectArray.forEach((currency) => {
-    for (const quoteCurrency in currency.rates) {
-      const baseCurrency = currency.base;
-      const currentRate = currency.rates[quoteCurrency];
-
-      if (
-        specialRates[baseCurrency] &&
-        specialRates[baseCurrency][quoteCurrency]
-      ) {
-        const specialRate = specialRates[baseCurrency][quoteCurrency];
-        if (currentRate >= specialRate) {
-          alert(
-            `Alert: 1 ${baseCurrency} is now ${currentRate} ${quoteCurrency} which is too high. (special rate: ${specialRate})`
-          );
-        }
-      }
-    }
-  });
-}
-
-//Implementing a watcher(interval) to periodically check a specific currency conversion and
-//alert the user when the value reaches a speicfic point.
-const watcherInterval = setInterval(() => {
-  checkSpecialRates();
-}, 60000); // interval in milliseconds
-
-//clearing the interval
-//clearInterval(watcherInterval);
 
 //finding the hotest conversion rate
