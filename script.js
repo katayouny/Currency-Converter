@@ -25,7 +25,7 @@ setInterval(() => {
     ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
     marketMessageBackground("rgb(219, 0, 0)");
   }
-}, 1000);
+}, 500);
 
 // Brand Currency form alpha -------------
 const brandObject = {
@@ -82,6 +82,14 @@ function valutaConverter(event) {
 // **********************************************
 // An array of the currency rate objects
 // **********************************************
+
+fetch(
+  "https://raw.githubusercontent.com/katayouny/katayouny.github.io/main/data/currency-converter.json"
+)
+  .then((response) => response.json())
+  .then((json) => {
+    functionsForbrandObjectArray(json);
+  });
 
 const brandObjectArray = [
   {
@@ -221,4 +229,4 @@ function currencyDisplayTable(event) {
   gridContainer.appendChild(table);
 }
 
-//finding the hotest conversion rate
+functionsForbrandObjectArray;
