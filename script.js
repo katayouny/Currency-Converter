@@ -82,35 +82,18 @@ function valutaConverter(event) {
 // **********************************************
 // An array of the currency rate objects
 // **********************************************
-
+const brandObjectArray = [];
 fetch(
   "https://raw.githubusercontent.com/katayouny/katayouny.github.io/main/data/currency-converter.json"
 )
   .then((response) => response.json())
   .then((json) => {
-    functionsForbrandObjectArray(json);
+    brandObjectArray.push(...json);
+    setEvents();
+  })
+  .catch((error) => {
+    setErrors(error);
   });
-
-const brandObjectArray = [
-  {
-    //timestamp: Date.now(),
-    base: "EUR",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-  {
-    //timestamp: Date.now(),
-    base: "USD",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-  {
-    //timestamp: Date.now(),
-    base: "DKK",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-];
 
 //The object of special/high rates
 const specialRates = {
@@ -128,22 +111,45 @@ const specialRates = {
   },
 };
 
-document
-  .getElementById("currencies-and-rate-creation-beta")
-  .addEventListener("submit", brandCurrencyBeta);
+function setEvents() {
+  document.getElementById("array-of-currencies-section-beta").style.display =
+    "block";
+  document.getElementById("show-currencies-with-rate-check").style.display =
+    "block";
 
-document
-  .getElementById("show-currencies-with-rate-check")
-  .addEventListener("submit", currencyDisplayTable);
+  document
+    .getElementById("currencies-and-rate-creation-beta")
+    .addEventListener("submit", brandCurrencyBeta);
 
-document
-  .getElementById("show-currencies-with-rate-check")
-  .addEventListener("reset", resetRateCondition);
+  document
+    .getElementById("show-currencies-with-rate-check")
+    .addEventListener("submit", currencyDisplayTable);
+
+  document
+    .getElementById("show-currencies-with-rate-check")
+    .addEventListener("reset", resetRateCondition);
+}
+
+function setErrors(error) {
+  document.getElementById(
+    "array-of-currencies-section-beta"
+  ).innerHTML = `<h1>THERE IS AN ERROR</h1><p>The error is:<br/>${error}</p>`;
+  document.getElementById("array-of-currencies-section-beta").style.color =
+    "white";
+  document.getElementById("array-of-currencies-section-beta").style.display =
+    "block";
+  document.getElementById(
+    "array-of-currencies-section-beta"
+  ).style.backgroundColor = "red";
+  document.getElementById("array-of-currencies-section-beta").style.padding =
+    "5px";
+}
 
 //ading currencies and rate function
 //**********************************
 function brandCurrencyBeta(event) {
   event.preventDefault();
+
   //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
   const baseCurrency = document.getElementById("base-currency-beta").value;
   const quoteName = document.getElementById("quote-name-beta").value;
@@ -228,5 +234,3 @@ function currencyDisplayTable(event) {
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
-
-functionsForbrandObjectArray;
