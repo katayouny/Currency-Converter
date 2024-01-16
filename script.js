@@ -25,7 +25,7 @@ setInterval(() => {
     ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
     marketMessageBackground("rgb(219, 0, 0)");
   }
-}, 500);
+}, 60000);
 
 // Brand Currency form alpha -------------
 const brandObject = {
