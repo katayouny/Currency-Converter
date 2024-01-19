@@ -116,6 +116,7 @@ function setEvents() {
     "block";
   document.getElementById("show-currencies-with-rate-check").style.display =
     "block";
+  document.getElementById("currency-converter2").style.display = "block";
 
   document
     .getElementById("currencies-and-rate-creation-beta")
@@ -128,6 +129,10 @@ function setEvents() {
   document
     .getElementById("show-currencies-with-rate-check")
     .addEventListener("reset", resetRateCondition);
+
+  document
+    .getElementById("valuta-converter-form2")
+    .addEventListener("submit", valutaConverter2);
 }
 
 function setErrors(error) {
@@ -145,12 +150,12 @@ function setErrors(error) {
     "5px";
 }
 
-//ading currencies and rate function
-//**********************************
+//adding currencies and rates
+//*******************************
 function brandCurrencyBeta(event) {
   event.preventDefault();
 
-  //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
+  //getting and filling objects of brandCurrencyArray, base currency, quote currency, & conversion rate------
   const baseCurrency = document.getElementById("base-currency-beta").value;
   const quoteName = document.getElementById("quote-name-beta").value;
   const quoteRate = document.getElementById("quote-rate-beta").value;
@@ -238,10 +243,6 @@ function currencyDisplayTable(event) {
 //**************************************
 // Currency Converter form
 //**************************************
-
-document
-  .getElementById("valuta-converter-form2")
-  .addEventListener("submit", valutaConverter2);
 
 function valutaConverter2(event) {
   event.preventDefault();
