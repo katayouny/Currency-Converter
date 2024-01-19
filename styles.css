@@ -1,9 +1,19 @@
 body {
   background-image: url(images/img.png);
   background-size: cover;
+  /*-webkit-backdrop-filter: opacity(80);
+      */
   margin: 0 10px;
   align-items: center;
 }
+
+/*.transbox {
+  margin: 20px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.9;
+  width: fit-content;
+}*/
 
 form {
   width: 35%;
