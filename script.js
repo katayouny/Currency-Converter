@@ -284,9 +284,10 @@ function valutaConverter2(event) {
   const selectedCurrency = brandObjectArray.find(
     (currency) =>
       currency.base === chosenBaseValuta2 &&
-      currency.rates === chosenQuoteValuta2
+      currency.rates.hasOwnProperty(chosenQuoteValuta2)
   );
-  if (selectedCurrency === true) {
+
+  if (selectedCurrency) {
     //(brandObjectArray.base[chosenBaseValuta2] &&
     //brandObjectArray.rates[chosenQuoteValuta2])
     convertedAmount2 =
