@@ -82,7 +82,8 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
   font-weight: bolder;
 }
 
-.converted-ammount {
+.converted-ammount,
+.converted-ammount2 {
   font-weight: bold;
 }
 
@@ -91,7 +92,8 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
   justify-content: baseline;
 }
 
-.converted-amount-value {
+.converted-amount-value,
+.converted-amount-value2 {
   color: rgb(112, 6, 0);
   font-weight: bold;
 }
