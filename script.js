@@ -25,9 +25,9 @@ setInterval(() => {
     ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
     marketMessageBackground("rgb(219, 0, 0)");
   }
-}, 60000);
+}, 1000);
 
-// Brand Currency form alpha -------------
+// Brand Currency ceator form alpha -------------
 const brandObject = {
   timestamp: Date.now(),
   base: "EUR",
@@ -74,7 +74,7 @@ function valutaConverter(event) {
     document.getElementById("converted-amount-value").innerHTML =
       convertedAmount.toFixed(2);
   } else {
-    alert("Conversion rate not available, insert another valuta");
+    alert("Conversion rate not available. Insert another valuta");
   }
 }
 
@@ -98,16 +98,16 @@ fetch(
 //The object of special/high rates
 const specialRates = {
   EUR: {
-    USD: 2,
-    DKK: 3,
+    USD: 1.5,
+    DKK: 8,
   },
   USD: {
-    EUR: 3,
-    DKK: 6,
+    EUR: 1.1,
+    DKK: 7,
   },
   DKK: {
-    EUR: 7,
-    USD: 6,
+    EUR: 0.3,
+    USD: 0.3,
   },
 };
 
@@ -233,4 +233,73 @@ function currencyDisplayTable(event) {
   });
   // Append the table to the grid container
   gridContainer.appendChild(table);
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//new conversion form part
+/*document
+  .getElementById("brand-currency-form")
+  .addEventListener("submit", brandCurrency);
+
+function brandCurrency(event) {
+  event.preventDefault();
+
+  const baseCurrency = document.getElementById("base-currency-alpha").value;
+  brandObject.base = baseCurrency;
+  let quoteName = document.getElementById("quote-name").value.toLowerCase();
+  let quoteRate = document.getElementById("quote-rate").value;
+  brandObject.rates[quoteName] = +quoteRate;
+
+  document.getElementById("quote-name").value = "";
+  document.getElementById("quote-rate").value = "";
+}
+*/
+
+//
+//
+//
+// Currency Converter form -------------
+
+document
+  .getElementById("valuta-converter-form2")
+  .addEventListener("submit", valutaConverter2);
+
+function valutaConverter2(event) {
+  event.preventDefault();
+
+  let convertedAmount2;
+
+  const moneyAmount2 = +document.getElementById("money-amount2").value;
+  const chosenBaseValuta2 = document.getElementById("the-base-currency").value;
+  const chosenQuoteValuta2 =
+    document.getElementById("the-quote-currency").value;
+
+  //Checks if the base valuta and quote valuta are available
+
+  const selectedCurrency = brandObjectArray.find(
+    (currency) =>
+      currency.base === chosenBaseValuta2 &&
+      currency.rates === chosenQuoteValuta2
+  );
+  if (selectedCurrency === true) {
+    //(brandObjectArray.base[chosenBaseValuta2] &&
+    //brandObjectArray.rates[chosenQuoteValuta2])
+    convertedAmount2 =
+      moneyAmount2 * selectedCurrency.rates[chosenQuoteValuta2];
+    document.getElementById("converted-amount-value2").innerHTML =
+      convertedAmount2.toFixed(2);
+  } else {
+    alert("Conversion rate not available. Insert another valuta");
+  }
 }
