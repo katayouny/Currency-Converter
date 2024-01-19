@@ -25,9 +25,9 @@ setInterval(() => {
     ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
     marketMessageBackground("rgb(219, 0, 0)");
   }
-}, 1000);
+}, 60000);
 
-// Brand Currency form alpha -------------
+// Brand Currency ceator form alpha -------------
 const brandObject = {
   timestamp: Date.now(),
   base: "EUR",
@@ -74,7 +74,7 @@ function valutaConverter(event) {
     document.getElementById("converted-amount-value").innerHTML =
       convertedAmount.toFixed(2);
   } else {
-    alert("Conversion rate not available, insert another valuta");
+    alert("Conversion rate not available. Insert another valuta");
   }
 }
 
@@ -82,60 +82,74 @@ function valutaConverter(event) {
 // **********************************************
 // An array of the currency rate objects
 // **********************************************
-
-const brandObjectArray = [
-  {
-    //timestamp: Date.now(),
-    base: "EUR",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-  {
-    //timestamp: Date.now(),
-    base: "USD",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-  {
-    //timestamp: Date.now(),
-    base: "DKK",
-    date: new Date().toLocaleDateString(),
-    rates: {},
-  },
-];
+const brandObjectArray = [];
+fetch(
+  "https://raw.githubusercontent.com/katayouny/katayouny.github.io/main/data/currency-converter.json"
+)
+  .then((response) => response.json())
+  .then((json) => {
+    brandObjectArray.push(...json);
+    setEvents();
+  })
+  .catch((error) => {
+    setErrors(error);
+  });
 
 //The object of special/high rates
 const specialRates = {
   EUR: {
-    USD: 2,
-    DKK: 3,
+    USD: 1.5,
+    DKK: 8,
   },
   USD: {
-    EUR: 3,
-    DKK: 6,
+    EUR: 1.1,
+    DKK: 7,
   },
   DKK: {
-    EUR: 7,
-    USD: 6,
+    EUR: 0.3,
+    USD: 0.3,
   },
 };
 
-document
-  .getElementById("currencies-and-rate-creation-beta")
-  .addEventListener("submit", brandCurrencyBeta);
+function setEvents() {
+  document.getElementById("array-of-currencies-section-beta").style.display =
+    "block";
+  document.getElementById("show-currencies-with-rate-check").style.display =
+    "block";
 
-document
-  .getElementById("show-currencies-with-rate-check")
-  .addEventListener("submit", currencyDisplayTable);
+  document
+    .getElementById("currencies-and-rate-creation-beta")
+    .addEventListener("submit", brandCurrencyBeta);
 
-document
-  .getElementById("show-currencies-with-rate-check")
-  .addEventListener("reset", resetRateCondition);
+  document
+    .getElementById("show-currencies-with-rate-check")
+    .addEventListener("submit", currencyDisplayTable);
+
+  document
+    .getElementById("show-currencies-with-rate-check")
+    .addEventListener("reset", resetRateCondition);
+}
+
+function setErrors(error) {
+  document.getElementById(
+    "array-of-currencies-section-beta"
+  ).innerHTML = `<h1>THERE IS AN ERROR</h1><p>The error is:<br/>${error}</p>`;
+  document.getElementById("array-of-currencies-section-beta").style.color =
+    "white";
+  document.getElementById("array-of-currencies-section-beta").style.display =
+    "block";
+  document.getElementById(
+    "array-of-currencies-section-beta"
+  ).style.backgroundColor = "red";
+  document.getElementById("array-of-currencies-section-beta").style.padding =
+    "5px";
+}
 
 //ading currencies and rate function
 //**********************************
 function brandCurrencyBeta(event) {
   event.preventDefault();
+
   //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
   const baseCurrency = document.getElementById("base-currency-beta").value;
   const quoteName = document.getElementById("quote-name-beta").value;
@@ -220,5 +234,3 @@ function currencyDisplayTable(event) {
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
-
-//finding the hotest conversion rate

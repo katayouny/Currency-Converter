@@ -7,8 +7,8 @@
     <title>Currency-Converter</title>
   </head>
   <body>
-    <div class="texttitle">
-      <h2>Currency Converter</h2>
+    <div class="title-text-container">
+      <h2 class="tiltle-text">Currency Converter</h2>
     </div>
 
     <!-- ****************************** -->
@@ -26,7 +26,7 @@
     <div class="currency-rate-creator">
       <form class="currency-rate-creator_form" id="brand-currency-form">
         <fieldset>
-          <legend>Brand new currency rate ceator</legend>
+          <legend>Currency rate ceator for EUR as base currency</legend>
 
           <label for="base-currency-alpha">The base currency</label>
           <input
@@ -65,7 +65,7 @@
             <br />
           </span>
           <br />
-          <div class="convert-currency_buttonc-section">
+          <div class="add-currency-and-rate">
             <button class="all-buttons" type="submit">
               Add currency & rate
             </button>
@@ -76,6 +76,7 @@
     <br />
 
     <!--valuta-converter part --------->
+    <!-- Money Conversion based on predefined exchange rate-->
     <!-- *********************************************************-->
 
     <div class="valuta-converter-based-on-rates">
@@ -120,16 +121,20 @@
             id="valuta-exchange-quote-valuta"
             step="0.001"
             required
-            placeholder="Quote-valuta"
+            placeholder="Quote currency"
           />
           <br />
+
           <!-- valuta convert button -->
           <button class="all-buttons" type="submit">Convert the valuta</button>
+          <br />
           <!-- Display the converted amount -->
-          <span
-            ><p>Converted amount:</p>
-            <p id="converted-amount-value"></p>
-          </span>
+          <div class="rate-conversion">
+            <span><p class="converted-ammount">Converted amount:</p></span>
+            <span
+              ><p class="converted-amount-value" id="converted-amount-value"></p
+            ></span>
+          </div>
         </fieldset>
       </form>
     </div>
@@ -139,7 +144,7 @@
     <!-- **********************************************************-->
 
     <br />
-    <div id="array-of-currencies-section-beta">
+    <div style="display: none" id="array-of-currencies-section-beta">
       <form id="currencies-and-rate-creation-beta">
         <fieldset>
           <legend>Currency rate creator</legend>
@@ -184,7 +189,7 @@
     <br />
 
     <!--- Second part - adding rate range condition  ------------------------- -->
-    <form id="show-currencies-with-rate-check">
+    <form style="display: none" id="show-currencies-with-rate-check">
       <fieldset>
         <legend>
           Set condition of rate range for currencies demonstartion

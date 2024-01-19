@@ -1,15 +1,13 @@
 body {
   background-image: url(images/img.png);
   background-size: cover;
-  /*-webkit-backdrop-filter: opacity(50);
-      */
   margin: 0 10px;
   align-items: center;
 }
 
 form {
   width: 35%;
-  margin-left: 5%;
+  margin-left: 2%;
   /*width: fit-content;*/
 }
 
@@ -42,17 +40,19 @@ input[type="number"] {
 }
 
 input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
-input::-webkit-inner-spin-button {
+  input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.texttitle {
-  font-size: 20px;
-  color: rgb(46, 0, 0);
-  font-weight: bold;
-  width: 50%;
-  margin-left: 15%;
+.title-text-container {
+  width: 35%;
+  margin-left: 7%;
+  color: rgb(19, 19, 19);
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: -1px 1px 0 #00cb00, 1px 1px 0 #ffffff, 1px -1px 0 #ffffff,
+    -1px -1px 0 #ffffff;
 }
 
 .button {
@@ -72,13 +72,28 @@ input::-webkit-inner-spin-button {
   font-weight: bolder;
 }
 
-.convert-currency_button-section {
+.converted-ammount {
+  font-weight: bold;
+}
+
+.rate-conversion {
+  display: flex;
+  justify-content: baseline;
+}
+
+.converted-amount-value {
+  color: rgb(112, 6, 0);
+  font-weight: bold;
+}
+
+.add-currency-and-rate {
   align-items: last baseline;
 }
 
 table {
   border-collapse: collapse;
   width: auto;
+  margin-left: 2%;
 }
 
 th,
@@ -93,10 +108,11 @@ td {
   font-weight: bolder;
   font-size: large;
   margin: 2px 0 2px 40px;
+  padding: 0.7%;
 }
 
 .market-message-holder {
   display: block;
   width: 35%;
-  margin-left: 5%;
+  margin-left: 2%;
 }
