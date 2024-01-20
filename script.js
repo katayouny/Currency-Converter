@@ -15,7 +15,7 @@ setInterval(() => {
     const houresLeftToClose = closingHour - currentHour;
     document.getElementById(
       "market-time-open-close-message"
-    ).textContent = `The market is open now. It will be closed on ${houresLeftToClose} hours.`;
+    ).textContent = `The market is open now. It will be closed on ${houresLeftToClose} hours`;
     marketMessageBackground("rgb(0, 219, 0)");
   }
   if (currentHour < openingHour || currentHour > closingHour) {
@@ -136,9 +136,6 @@ function resetRateCondition(event) {
 function currencyDisplayTable(event) {
   event.preventDefault();
 
-  fromRate = document.getElementById("rate-from").value;
-  toRate = document.getElementById("rate-to").value;
-
   const gridContainer = document.getElementById(
     "currency-rates-grid-container"
   );
@@ -158,37 +155,46 @@ function currencyDisplayTable(event) {
   headerRow.insertCell(2).textContent = "Conversion Rate";
   headerRow.style.fontWeight = "bold";
 
-  // Creatinging rows for each entered currency object of brandObjectArray
+  // Creatinging rows and cells for each currency object of brandObjectArray
   //   if condition sets => creating/showing rows based on rate filter
   //   + checking if currency.rates[quoteCurrency] is a specialRate => alert
   brandObjectArray.forEach((currency) => {
     for (const quoteCurrency in currency.rates) {
       const baseCurrency = currency.base;
       const currentRate = currency.rates[quoteCurrency];
-      if (
-        fromRate !== null &&
-        toRate !== null &&
-        currency.rates[quoteCurrency] >= +fromRate &&
-        currency.rates[quoteCurrency] <= +toRate
-      ) {
+      const specialRate = specialRates[baseCurrency][quoteCurrency];
+
+      fromRate = document.getElementById("rate-from").value;
+      toRate = document.getElementById("rate-to").value;
+
+      // a callback function for creating rows and cells
+      function creatingRowsAndCells() {
+        // creating rows
         const row = table.insertRow();
-        //creating cells
-        row.insertCell(0).textContent = currency.base;
-        row.insertCell(1).textContent = quoteCurrency;
-        if (
-          specialRates[baseCurrency] &&
-          specialRates[baseCurrency][quoteCurrency]
-        ) {
-          const specialRate = specialRates[baseCurrency][quoteCurrency];
-          row.insertCell(2).textContent = `${currency.rates[quoteCurrency]} ${
-            currentRate >= specialRate
-              ? "🔥 The conversion rate is too high today. "
-              : ""
-          }`;
-        }
+        // creating cells
+        row.insertCell(0).textContent = baseCurrency; // shows base currency
+        row.insertCell(1).textContent = quoteCurrency; // shows quote currency
+        // shows the conversion rate
+        row.insertCell(2).textContent = `${currentRate} ${
+          currentRate >= specialRate // checks if the rate is a special rate
+            ? ":🔥: The conversion rate is too high today. "
+            : ""
+        }`;
+      }
+      // Check if the rate is within the specified range or if no range is specified
+      if (fromRate === null && toRate === null) {
+        creatingRowsAndCells();
+      } else if (
+        ((fromRate !== null || toRate !== null) &&
+          currency.rates[quoteCurrency] >= +fromRate) ||
+        ((fromRate !== null || toRate !== null) &&
+          currency.rates[quoteCurrency] <= +toRate)
+      ) {
+        creatingRowsAndCells();
       }
     }
   });
+
   // Append the table to the grid container
   gridContainer.appendChild(table);
 }
