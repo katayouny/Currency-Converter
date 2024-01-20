@@ -1,24 +1,13 @@
 body {
   background-image: url(images/img.png);
   background-size: cover;
-  /*-webkit-backdrop-filter: opacity(80);
-      */
   margin: 0 10px;
   align-items: center;
 }
 
-/*.transbox {
-  margin: 20px;
-  background-color: #ffffff;
-  border: 1px solid black;
-  opacity: 0.9;
-  width: fit-content;
-}*/
-
 form {
-  width: 35%;
+  width: 30%;
   margin-left: 2%;
-  /*width: fit-content;*/
 }
 
 legend {
@@ -31,6 +20,7 @@ legend {
   background-color: rgb(238, 113, 91);
   color: rgb(0, 54, 4);
   font-weight: bold;
+  font-size: medium;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -57,12 +47,28 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
 
 .title-text-container {
   width: 35%;
-  margin-left: 7%;
+  margin-left: 5%;
   color: rgb(19, 19, 19);
   font-size: 25px;
   font-weight: bolder;
   text-shadow: -1px 1px 0 #00cb00, 1px 1px 0 #ffffff, 1px -1px 0 #ffffff,
     -1px -1px 0 #ffffff;
+}
+
+/* Responsive Style */
+@media screen and (max-width: 768px) {
+  .title-text-container {
+    width: 80%;
+    margin-left: 2%;
+  }
+
+  label,
+  legend,
+  .rate-conversion,
+  .explanation-in-form,
+  .title-text-container {
+    font-size: small;
+  }
 }
 
 .button {
@@ -72,19 +78,9 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
   font-weight: bold;
 }
 
-.zero-rate + * {
-  font-weight: bold;
-  color: green;
-}
-
-.explanations-in-forms {
+.explanation-in-form {
   color: rgb(112, 6, 0);
   font-weight: bolder;
-}
-
-.converted-ammount,
-.converted-ammount2 {
-  font-weight: bold;
 }
 
 .rate-conversion {
@@ -92,8 +88,11 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
   justify-content: baseline;
 }
 
-.converted-amount-value,
-.converted-amount-value2 {
+.converted-ammount-text {
+  font-weight: bold;
+}
+
+.converted-amount-value {
   color: rgb(112, 6, 0);
   font-weight: bold;
 }
@@ -118,13 +117,13 @@ td {
 .market-message {
   color: rgb(0, 0, 0);
   font-weight: bolder;
-  font-size: large;
-  margin: 2px 0 2px 40px;
+  font-size: medium;
+  margin: 2px 0 2px 30px;
   padding: 0.7%;
 }
 
 .market-message-holder {
   display: block;
-  width: 35%;
+  width: 30%;
   margin-left: 2%;
 }
