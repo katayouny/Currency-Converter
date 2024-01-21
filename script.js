@@ -2,7 +2,7 @@
 // *****************************************************************
 function marketMessageBackground(color) {
   document.getElementById(
-    "markert-message-background-color"
+    "market-message-background-color"
   ).style.backgroundColor = color; //background color of Market message
 }
 
