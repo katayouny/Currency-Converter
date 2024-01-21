@@ -129,6 +129,7 @@ function resetRateCondition(event) {
   document.getElementById("rate-to").value = "";
   fromRate = null;
   toRate = null;
+  currencyDisplayTable(event);
 }
 
 // Showing the table(grid) of currencies and rates based on applied rate range filter
@@ -164,11 +165,11 @@ function currencyDisplayTable(event) {
       const currentRate = currency.rates[quoteCurrency];
       const specialRate = specialRates[baseCurrency][quoteCurrency];
 
-      fromRate = document.getElementById("rate-from").value;
-      toRate = document.getElementById("rate-to").value;
+      fromRate = document.getElementById("rate-from").value || 0;
+      toRate = document.getElementById("rate-to").value || 10000;
 
-      // a callback function for creating rows and cells
-      function creatingRowsAndCells() {
+      // Check if the rate is within the specified range or if no range is specified
+      if (currentRate >= fromRate && currentRate <= toRate) {
         // creating rows
         const row = table.insertRow();
         // creating cells
@@ -180,17 +181,6 @@ function currencyDisplayTable(event) {
             ? ":🔥: The conversion rate is too high today. "
             : ""
         }`;
-      }
-      // Check if the rate is within the specified range or if no range is specified
-      if (fromRate === null && toRate === null) {
-        creatingRowsAndCells();
-      } else if (
-        ((fromRate !== null || toRate !== null) &&
-          currency.rates[quoteCurrency] >= +fromRate) ||
-        ((fromRate !== null || toRate !== null) &&
-          currency.rates[quoteCurrency] <= +toRate)
-      ) {
-        creatingRowsAndCells();
       }
     }
   });
