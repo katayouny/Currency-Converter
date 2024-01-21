@@ -6,9 +6,8 @@ body {
 }
 
 form {
-  width: 35%;
+  width: 30%;
   margin-left: 2%;
-  /*width: fit-content;*/
 }
 
 legend {
@@ -21,6 +20,7 @@ legend {
   background-color: rgb(238, 113, 91);
   color: rgb(0, 54, 4);
   font-weight: bold;
+  font-size: medium;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -47,12 +47,28 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
 
 .title-text-container {
   width: 35%;
-  margin-left: 7%;
+  margin-left: 5%;
   color: rgb(19, 19, 19);
   font-size: 25px;
   font-weight: bolder;
   text-shadow: -1px 1px 0 #00cb00, 1px 1px 0 #ffffff, 1px -1px 0 #ffffff,
     -1px -1px 0 #ffffff;
+}
+
+/* Responsive Style */
+@media screen and (max-width: 768px) {
+  .title-text-container {
+    width: 80%;
+    margin-left: 2%;
+  }
+
+  label,
+  legend,
+  .rate-conversion,
+  .explanation-in-form,
+  .title-text-container {
+    font-size: small;
+  }
 }
 
 .button {
@@ -62,23 +78,18 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
   font-weight: bold;
 }
 
-.zero-rate + * {
-  font-weight: bold;
-  color: green;
-}
-
-.explanations-in-forms {
+.explanation-in-form {
   color: rgb(112, 6, 0);
   font-weight: bolder;
-}
-
-.converted-ammount {
-  font-weight: bold;
 }
 
 .rate-conversion {
   display: flex;
   justify-content: baseline;
+}
+
+.converted-ammount-text {
+  font-weight: bold;
 }
 
 .converted-amount-value {
@@ -106,13 +117,13 @@ td {
 .market-message {
   color: rgb(0, 0, 0);
   font-weight: bolder;
-  font-size: large;
-  margin: 2px 0 2px 40px;
+  font-size: medium;
+  margin: 2px 0 2px 30px;
   padding: 0.7%;
 }
 
 .market-message-holder {
   display: block;
-  width: 35%;
+  width: 30%;
   margin-left: 2%;
 }

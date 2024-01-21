@@ -11,81 +11,85 @@
       <h2 class="tiltle-text">Currency Converter</h2>
     </div>
 
-    <!-- ****************************** -->
-    <!--     Market situation message   -->
-    <!-- Displaying the message for market openning and closeing time -->
-    <div class="market-message-holder" id="markert-message-background-color">
-      <p id="maket-time-open-close-message" class="market-message"></p>
+    <!-- SHOWING THE MARKET SITUATION, OPENING AND CLOSING TIME -->
+    <!-- ****************************************************** -->
+    <div class="market-message-holder" id="market-message-background-color">
+      <p id="market-time-open-close-message" class="market-message"></p>
     </div>
 
-    <!-- *************************************************************************************-->
-    <!-- An object of a base currency, quote currencies object, and rates -------------->
-    <!-- *************************************************************************************-->
-    <!-- currency-rate-creator part --------------->
-
-    <div class="currency-rate-creator">
-      <form class="currency-rate-creator_form" id="brand-currency-form">
+    <!-- ADDING CURRENCIES AND CONVERSION RATE (THE ARRAY OF CURRENCY RATE OBJECTS)-->
+    <!-- ************************************************************************* -->
+    <div style="display: none" id="creating-currencies-and-rates">
+      <form id="currencies-and-rate-creator">
         <fieldset>
-          <legend>Currency rate ceator for EUR as base currency</legend>
+          <legend>Currency rate creator</legend>
 
-          <label for="base-currency-alpha">The base currency</label>
+          <!-- base currency selection -->
+          <label for="base-currency">Choose a base currency to be added:</label>
+          <select id="base-currency">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
+          <br />
+
+          <!-- quote currency selection -->
+          <label for="quote-name">Choose a quote currency to be added:</label>
+          <select id="quote-name">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
+          <br />
+
+          <!--Entering quote rate -->
+          <label for="quote-rate">Conversion rate</label>
           <input
-            type="text"
-            id="base-currency-alpha"
-            value="EUR"
-            placeholder="EUR"
-            readonly
+            type="number"
+            id="quote-rate"
+            step="0.001"
+            required
+            placeholder="quote-rate"
           />
-          <br />
-          <p class="explanations-in-forms">
-            Insert a the quote valuta and rate to be added<br
-              class="zero-rate"
-            />
-          </p>
 
-          <span>
-            <label for="quote-name">Quote name</label>
-            <input
-              type="text"
-              id="quote-name"
-              step="0.001"
-              required
-              placeholder="quote-name"
-            />
-            <br />
-
-            <label for="quote-rate">Quote rate</label>
-            <input
-              type="number"
-              id="quote-rate"
-              step="0.001"
-              required
-              placeholder="quote-rate"
-            />
-            <br />
-          </span>
-          <br />
-          <div class="add-currency-and-rate">
-            <button class="all-buttons" type="submit">
-              Add currency & rate
-            </button>
-          </div>
+          <!-- adding currencies and conversion rates -->
+          <button class="all-buttons" type="submit">Add</button>
         </fieldset>
       </form>
     </div>
     <br />
 
-    <!--valuta-converter part --------->
-    <!-- Money Conversion based on predefined exchange rate-->
-    <!-- *********************************************************-->
+    <!-- SETTING RATE RANGE CONDITION/FILTER -->
+    <!-- *********************************** -->
+    <form style="display: none" id="show-currencies-with-rate-check">
+      <fieldset>
+        <legend>Set rate filter for currencies demonstration</legend>
+        <label for="rate-from">From</label>
+        <input
+          type="number"
+          id="rate-from"
+          placeholder="Enter the rate 0.001"
+        />
+        <label for="rate-to">To</label>
+        <input type="number" id="rate-to" placeholder="Enter the rate 0.001" />
 
-    <div class="valuta-converter-based-on-rates">
-      <form
-        class="valuta-converter-based-on-rates_form"
-        id="valuta-converter-form"
-      >
+        <button class="all-buttons" type="submit">
+          Show currencies and conversion rates
+        </button>
+        <button class="all-buttons" type="reset">Reset rate condition</button>
+      </fieldset>
+    </form>
+    <br />
+    <div id="currency-rates-grid-container" class="table-container">
+      <!-- displying the table of currencies and rates based on applies rate filte -->
+    </div>
+
+    <!-- VALUTA CONVERSION -->
+    <!-- ***************** -->
+    <div class="valuta-converter-based-on-rates" id="currency-converter">
+      <form class="valuta-converter-based-on-rates_form" id="valuta-converter">
         <fieldset>
-          <legend>Money Conversion based on predefined exchange rate</legend>
+          <legend>Valuta Conversion</legend>
 
           <label for="money-amount">Money amount</label>
           <input
@@ -98,39 +102,33 @@
             required
             placeholder="Enter the amount 0.00"
           />
+          <p class="explanation-in-form">
+            Select the base and the quote valuta for conversion
+          </p>
 
-          <div>
-            <p class="explanations-in-forms">
-              Insert the quote valuta for conversion
-            </p>
-          </div>
+          <!-- base currency selection -->
+          <label for="the-base-currency">Base currency</label>
+          <select id="the-base-currency">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
 
-          <!--Base valuta-->
-          <label for="base-currency">The base valuta</label>
-          <input
-            type="text"
-            id="base-currency"
-            value="EUR"
-            placeholder="EUR"
-            readonly
-          />
-          <!--Entering quote valuta -->
-          <label for="valuta-exchange-quote-valuta">Quote valuta</label>
-          <input
-            type="text"
-            id="valuta-exchange-quote-valuta"
-            step="0.001"
-            required
-            placeholder="Quote currency"
-          />
+          <!-- quote currency selection -->
+          <label for="the-quote-currency">Quote currency</label>
+          <select id="the-quote-currency">
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
           <br />
 
           <!-- valuta convert button -->
           <button class="all-buttons" type="submit">Convert the valuta</button>
           <br />
-          <!-- Display the converted amount -->
+          <!-- Displaying the converted amount -->
           <div class="rate-conversion">
-            <span><p class="converted-ammount">Converted amount:</p></span>
+            <span><p class="converted-ammount-text">Converted amount:</p></span>
             <span
               ><p class="converted-amount-value" id="converted-amount-value"></p
             ></span>
@@ -138,88 +136,6 @@
         </fieldset>
       </form>
     </div>
-
-    <!-- **********************************************************-->
-    <!-- An array of the currency rate objects -------------->
-    <!-- **********************************************************-->
-
-    <br />
-    <div style="display: none" id="array-of-currencies-section-beta">
-      <form id="currencies-and-rate-creation-beta">
-        <fieldset>
-          <legend>Currency rate creator</legend>
-
-          <!-- base currency selection -->
-          <label for="base-currency-beta"
-            >Choose a base currency to be added:</label
-          >
-          <select id="base-currency-beta">
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="DKK">DKK</option>
-          </select>
-          <br />
-
-          <!-- quote currency selection -->
-          <label for="quote-name-beta"
-            >Choose a quote currency to be added:</label
-          >
-          <select id="quote-name-beta">
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="DKK">DKK</option>
-          </select>
-          <br />
-
-          <!--Entering quote rate -->
-          <label for="quote-rate-beta">Conversion rate</label>
-          <input
-            type="number"
-            id="quote-rate-beta"
-            step="0.001"
-            required
-            placeholder="quote-rate"
-          />
-
-          <!--Add the entered currencies with related conversion rate  -->
-          <button class="all-buttons" type="submit">Add</button>
-        </fieldset>
-      </form>
-    </div>
-    <br />
-
-    <!--- Second part - adding rate range condition  ------------------------- -->
-    <form style="display: none" id="show-currencies-with-rate-check">
-      <fieldset>
-        <legend>
-          Set condition of rate range for currencies demonstartion
-        </legend>
-        <label for="rate-from">From</label>
-        <input
-          type="number"
-          id="rate-from"
-          placeholder="Enter the rate 0.001"
-          required
-        />
-        <label for="rate-to">To</label>
-        <input
-          type="number"
-          id="rate-to"
-          placeholder="Enter the rate 0.001"
-          required
-        />
-
-        <button class="all-buttons" type="submit">
-          Show currencies and conversion rates
-        </button>
-        <button class="all-buttons" type="reset">Reset rate condition</button>
-      </fieldset>
-    </form>
-    <br />
-    <div id="currency-rates-grid-container" class="table-container">
-      <!-- the currency table with the option of 'filtered rates' will get displayed here  -->
-    </div>
-
     <script src="script.js"></script>
   </body>
 </html>
