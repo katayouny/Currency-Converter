@@ -28,3 +28,20 @@ The brandObjectArray in 'script.js' is declared beased on the below model, which
 "rates": {}
 }
 ]
+
+specialRates object:
+{
+EUR: {
+USD: 1.5,
+DKK: 8,
+},
+USD: {
+EUR: 1.1,
+DKK: 7,
+},
+DKK: {
+EUR: 0.3,
+USD: 0.3,
+},
+};
+
