@@ -6,9 +6,12 @@ body {
 }
 
 form {
-  width: 35%;
+  width: 28%;
   margin-left: 2%;
-  /*width: fit-content;*/
+  border-radius: 9px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: small;
 }
 
 legend {
@@ -21,6 +24,7 @@ legend {
   background-color: rgb(238, 113, 91);
   color: rgb(0, 54, 4);
   font-weight: bold;
+  font-size: 15px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -34,7 +38,7 @@ label {
 }
 
 input[type="number"] {
-  width: 150px;
+  width: 135px;
   margin: 5px 0px;
   appearance: none;
 }
@@ -46,8 +50,8 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
 }
 
 .title-text-container {
-  width: 35%;
-  margin-left: 7%;
+  width: 28%;
+  margin-left: 5%;
   color: rgb(19, 19, 19);
   font-size: 25px;
   font-weight: bolder;
@@ -55,30 +59,26 @@ input::-webkit-outer-spin-button, /*to set cursur as hand pointer*/
     -1px -1px 0 #ffffff;
 }
 
-.button {
+button {
   cursor: pointer;
   padding: 3px;
-  border-radius: 10px;
-  font-weight: bold;
+  border-radius: 3px;
+  border-color: rgb(171, 84, 23);
+  font-weight: lighter;
 }
 
-.zero-rate + * {
-  font-weight: bold;
-  color: green;
-}
-
-.explanations-in-forms {
+.explanation-in-form {
   color: rgb(112, 6, 0);
   font-weight: bolder;
-}
-
-.converted-ammount {
-  font-weight: bold;
 }
 
 .rate-conversion {
   display: flex;
   justify-content: baseline;
+}
+
+.converted-ammount-text {
+  font-weight: bold;
 }
 
 .converted-amount-value {
@@ -106,13 +106,29 @@ td {
 .market-message {
   color: rgb(0, 0, 0);
   font-weight: bolder;
-  font-size: large;
-  margin: 2px 0 2px 40px;
+  font-size: medium;
+  margin: 2px 0 2px 30px;
   padding: 0.7%;
 }
 
 .market-message-holder {
   display: block;
-  width: 35%;
+  width: 28%;
   margin-left: 2%;
+}
+
+/* Responsive Style */
+@media screen and (max-width: 768px) {
+  .title-text-container {
+    width: 80%;
+    margin-left: 2%;
+  }
+
+  label,
+  legend,
+  .rate-conversion,
+  .explanation-in-form,
+  .title-text-container {
+    font-size: small;
+  }
 }

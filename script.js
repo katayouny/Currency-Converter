@@ -1,18 +1,24 @@
-// Implementing a timeout to show the market open and close time
+// IMPLEMENTING AN INTERVAL TO SHOW THE MARKET OPENING AND CLOSING TIME
+// *****************************************************************
 function marketMessageBackground(color) {
   document.getElementById(
-    "markert-message-background-color"
+    "market-message-background-color"
   ).style.backgroundColor = color; //background color of Market message
 }
 
 setInterval(() => {
   const currentHour = new Date().getHours();
+  const currentMinutes = new Date().getMinutes();
   const openingHour = 9;
   const closingHour = 17;
 
   if (currentHour > openingHour && currentHour < closingHour) {
-    document.getElementById("maket-time-open-close-message").textContent =
-      " Market is open now";
+    const houresLeftToClose = closingHour - currentHour;
+    const minutesLeftToClose = 60 - currentMinutes;
+    document.getElementById(
+      "market-time-open-close-message"
+    ).textContent = `The market is open now. \n 
+    It will be closed on ${houresLeftToClose} hours and ${minutesLeftToClose} minuites`;
     marketMessageBackground("rgb(0, 219, 0)");
   }
   if (currentHour < openingHour || currentHour > closingHour) {
@@ -20,68 +26,17 @@ setInterval(() => {
       currentHour > closingHour
         ? 24 - currentHour + 9
         : openingHour - currentHour;
+    const minutesLeftToOpen = currentMinutes;
     document.getElementById(
-      "maket-time-open-close-message"
-    ).textContent = `Market is closed now. Market will be opend on ${houresLeftToOpen} hours`;
+      "market-time-open-close-message"
+    ).textContent = `The market is closed now. \n 
+    It will be opened on ${houresLeftToOpen} hours and ${minutesLeftToOpen} minuites`;
     marketMessageBackground("rgb(219, 0, 0)");
   }
-}, 60000);
+}, 6000);
 
-// Brand Currency ceator form alpha -------------
-const brandObject = {
-  timestamp: Date.now(),
-  base: "EUR",
-  date: new Date().toLocaleDateString(),
-  rates: {},
-};
-
-document
-  .getElementById("brand-currency-form")
-  .addEventListener("submit", brandCurrency);
-
-function brandCurrency(event) {
-  event.preventDefault();
-
-  const baseCurrency = document.getElementById("base-currency-alpha").value;
-  brandObject.base = baseCurrency;
-  let quoteName = document.getElementById("quote-name").value.toLowerCase();
-  let quoteRate = document.getElementById("quote-rate").value;
-  brandObject.rates[quoteName] = +quoteRate;
-
-  document.getElementById("quote-name").value = "";
-  document.getElementById("quote-rate").value = "";
-}
-
-// Currency Converter form -------------
-
-document
-  .getElementById("valuta-converter-form")
-  .addEventListener("submit", valutaConverter);
-
-function valutaConverter(event) {
-  event.preventDefault();
-
-  let convertedAmount;
-
-  const moneyAmount = +document.getElementById("money-amount").value;
-  const chosenQuoteValuta = document
-    .getElementById("valuta-exchange-quote-valuta")
-    .value.toLowerCase();
-
-  if (brandObject.rates[chosenQuoteValuta]) {
-    //Checks if the quote valuta is available
-    convertedAmount = moneyAmount * brandObject.rates[chosenQuoteValuta];
-    document.getElementById("converted-amount-value").innerHTML =
-      convertedAmount.toFixed(2);
-  } else {
-    alert("Conversion rate not available. Insert another valuta");
-  }
-}
-
-// updateing existing currency conversion rates with new rates form
-// **********************************************
-// An array of the currency rate objects
-// **********************************************
+// THE ARRAY OF THE CURRENCY RATE OBJECTS
+// **************************************
 const brandObjectArray = [];
 fetch(
   "https://raw.githubusercontent.com/katayouny/katayouny.github.io/main/data/currency-converter.json"
@@ -95,7 +50,8 @@ fetch(
     setErrors(error);
   });
 
-//The object of special/high rates
+// THE OBJECT OF SPECIAL RATES
+// ***************************
 const specialRates = {
   EUR: {
     USD: 1.5,
@@ -111,15 +67,18 @@ const specialRates = {
   },
 };
 
+// Displaying forms and running events when brandObjectArray is fetched
+// -----------------------------------------------------------------
 function setEvents() {
-  document.getElementById("array-of-currencies-section-beta").style.display =
+  document.getElementById("creating-currencies-and-rates").style.display =
     "block";
   document.getElementById("show-currencies-with-rate-check").style.display =
     "block";
+  document.getElementById("currency-converter").style.display = "block";
 
   document
-    .getElementById("currencies-and-rate-creation-beta")
-    .addEventListener("submit", brandCurrencyBeta);
+    .getElementById("currencies-and-rate-creator")
+    .addEventListener("submit", brandCurrency);
 
   document
     .getElementById("show-currencies-with-rate-check")
@@ -128,109 +87,140 @@ function setEvents() {
   document
     .getElementById("show-currencies-with-rate-check")
     .addEventListener("reset", resetRateCondition);
+
+  document
+    .getElementById("valuta-converter")
+    .addEventListener("submit", valutaConverter);
 }
 
+// Displaying error if the 'brandObjectArray' is not fetched
+// ---------------------------------------------------------
 function setErrors(error) {
   document.getElementById(
-    "array-of-currencies-section-beta"
+    "creating-currencies-and-rates"
   ).innerHTML = `<h1>THERE IS AN ERROR</h1><p>The error is:<br/>${error}</p>`;
-  document.getElementById("array-of-currencies-section-beta").style.color =
+  document.getElementById("creating-currencies-and-rates").style.color =
     "white";
-  document.getElementById("array-of-currencies-section-beta").style.display =
+  document.getElementById("creating-currencies-and-rates").style.display =
     "block";
   document.getElementById(
-    "array-of-currencies-section-beta"
+    "creating-currencies-and-rates"
   ).style.backgroundColor = "red";
-  document.getElementById("array-of-currencies-section-beta").style.padding =
+  document.getElementById("creating-currencies-and-rates").style.padding =
     "5px";
 }
 
-//ading currencies and rate function
-//**********************************
-function brandCurrencyBeta(event) {
+// ADDING CURRENCIES AND RATES
+// ***************************
+function brandCurrency(event) {
   event.preventDefault();
 
-  //getting and filling objects of brandCurrencyArray, base & quote currency, & conversion rate------
-  const baseCurrency = document.getElementById("base-currency-beta").value;
-  const quoteName = document.getElementById("quote-name-beta").value;
-  const quoteRate = document.getElementById("quote-rate-beta").value;
+  // getting currencies and rates and filling 'brandObjectArray' with base currency, quote currency, & conversion rates
+  const baseCurrency = document.getElementById("base-currency").value;
+  const quoteName = document.getElementById("quote-name").value;
+  const quoteRate = document.getElementById("quote-rate").value;
 
   const selectedCurrency = brandObjectArray.find(
     (currency) => currency.base === baseCurrency
   );
 
   selectedCurrency.rates[quoteName] = +quoteRate;
-  document.getElementById("quote-rate-beta").value = "";
+  document.getElementById("quote-rate").value = "";
 }
 
+// DISPLAYING CURRENCIES AND RATES TABLE + SETTING AND RESETTING RATE FILTER
+// *************************************************************************
+function currencyDisplayTable(event) {
+  event.preventDefault();
+
+  const gridContainer = document.getElementById(
+    "currency-rates-grid-container"
+  );
+
+  // Clearing the previous content in the grid container
+  gridContainer.innerHTML = "";
+
+  // Createing the table element
+  const table = document.createElement("table");
+  table.style.marginBottom = "20px";
+
+  // Createing header row and header cells
+  const headerRow = table.createTHead().insertRow(0);
+  headerRow.insertCell(0).textContent = "Base Currency";
+  headerRow.insertCell(1).textContent = "Quote Currency";
+  headerRow.insertCell(2).textContent = "Conversion Rate";
+  headerRow.style.fontWeight = "bold";
+
+  // Creatinging rows and cells for each currency object of brandObjectArray and realated conversion rates
+  // -----------------------------------------------------------------------------------------------------
+  //   if filter sets => creating/showing rows based on rate filter
+
+  brandObjectArray.forEach((currency) => {
+    for (const quoteCurrency in currency.rates) {
+      const baseCurrency = currency.base;
+      const currentRate = currency.rates[quoteCurrency];
+      const specialRate = specialRates[baseCurrency][quoteCurrency];
+
+      fromRate = document.getElementById("rate-from").value || 0;
+      toRate = document.getElementById("rate-to").value || 10000;
+
+      // Check if current rate is within the specified range or if no rate filter is applied
+      if (currentRate >= fromRate && currentRate <= toRate) {
+        // creating row
+        const row = table.insertRow();
+        // creating cells
+        row.insertCell(0).textContent = baseCurrency; // shows base currency
+        row.insertCell(1).textContent = quoteCurrency; // shows quote currency
+        // shows the conversion rate, if currency.rates[quoteCurrency] is a specialRate => alert
+        row.insertCell(2).textContent = `${currentRate} ${
+          currentRate >= specialRate // checks if the rate is a special rate
+            ? ":🔥: The conversion rate is too high today. "
+            : ""
+        }`;
+      }
+    }
+  });
+  // Append the table to the grid container
+  gridContainer.appendChild(table);
+}
+// Reseting rate filter to null
 let fromRate = null;
 let toRate = null;
-// reset rate conditions fiels functions
-//**************************************
+
 function resetRateCondition(event) {
   event.preventDefault();
   document.getElementById("rate-from").value = "";
   document.getElementById("rate-to").value = "";
   fromRate = null;
   toRate = null;
+  currencyDisplayTable(event);
 }
 
-//Showing the table of currencies and rates with applied rate range filter
-function currencyDisplayTable(event) {
+// Currency Converter
+// ******************
+function valutaConverter(event) {
   event.preventDefault();
 
-  fromRate = document.getElementById("rate-from").value;
-  toRate = document.getElementById("rate-to").value;
+  let convertedAmount;
 
-  const gridContainer = document.getElementById(
-    "currency-rates-grid-container"
+  const moneyAmount = +document.getElementById("money-amount").value;
+  const chosenBaseValuta = document.getElementById("the-base-currency").value;
+  const chosenQuoteValuta = document.getElementById("the-quote-currency").value;
+
+  //Checking if the base valuta and quote valuta are available
+  const selectedCurrency = brandObjectArray.find(
+    (currency) =>
+      currency.base === chosenBaseValuta &&
+      currency.rates.hasOwnProperty(chosenQuoteValuta)
   );
 
-  // Clear the previous content in the grid container
-  gridContainer.innerHTML = "";
-
-  // Create a table element
-  const table = document.createElement("table");
-
-  // Create header row
-  const headerRow = table.createTHead().insertRow(0);
-  headerRow.insertCell(0).textContent = "Base Currency";
-  headerRow.insertCell(1).textContent = "Quote Currency";
-  headerRow.insertCell(2).textContent = "Rate";
-
-  // Creating rows for each entered currency object of brandObjectArray
-  //
-  //if condition sets >> creating rows based on rate condition
-  //plus Check if currency.rates[quoteCurrency] is a specialRate
-
-  brandObjectArray.forEach((currency) => {
-    for (const quoteCurrency in currency.rates) {
-      const baseCurrency = currency.base;
-      const currentRate = currency.rates[quoteCurrency];
-      if (
-        fromRate !== null &&
-        toRate !== null &&
-        currency.rates[quoteCurrency] >= +fromRate &&
-        currency.rates[quoteCurrency] <= +toRate
-      ) {
-        const row = table.insertRow();
-        //creating cells
-        row.insertCell(0).textContent = currency.base;
-        row.insertCell(1).textContent = quoteCurrency;
-        if (
-          specialRates[baseCurrency] &&
-          specialRates[baseCurrency][quoteCurrency]
-        ) {
-          const specialRate = specialRates[baseCurrency][quoteCurrency];
-          row.insertCell(2).textContent = `${currency.rates[quoteCurrency]} ${
-            currentRate >= specialRate
-              ? "🔥Don't trade today.The conversion rate is too high"
-              : ""
-          }`;
-        }
-      }
-    }
-  });
-  // Append the table to the grid container
-  gridContainer.appendChild(table);
+  if (selectedCurrency) {
+    convertedAmount = moneyAmount * selectedCurrency.rates[chosenQuoteValuta];
+    document.getElementById("converted-amount-value").innerHTML =
+      convertedAmount.toFixed(2);
+  } else {
+    alert(
+      "No conversion rate is available for these currencies. Select other valutas"
+    );
+  }
 }
